@@ -1,10 +1,36 @@
-import React from 'react';
-import { Container, Row, Col, Button, Card, Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container, Row, Col, Button, Card, Table } from 'react-bootstrap';
+import axios from 'axios';
+
 
 
 
 const Student = () => {
+
+  // Student all data
+  const [student, setStudent] = useState([]);
+
+  // get data process
+  useEffect( () => {
+
+    getAllStudent();
+
+  }, []);
+
+  // get data function
+  async function getAllStudent(){
+
+    let res = await axios.get('http://localhost:8000/students');
+
+    setStudent(res.data.reverse());
+
+  }
+
+
+
   return (
     <>
     <section className="student">
@@ -21,25 +47,37 @@ const Student = () => {
                         <tr>
                             <th>#</th>
                             <th>Student</th>
+                            <th>Study</th>
                             <th>Skill</th>
-                            <th>Staff</th>
+                            <th>Gender</th>
+                            <th>Photo</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <Link to='/student/view/:id'  className='btn btn-info'>view</Link>&nbsp;
-                                <Link to='/student/edit/:id'  className='btn btn-warning'>Edit</Link>&nbsp;
-                                <Link to='student/delete/:id'  className='btn btn-danger'>Delete</Link>
-                            </td>
-                        </tr>
+                        {
+                          student.map( (data, index) => 
+                          
+                            <tr>
+                              <td>{ index + 1 }</td>
+                              <td>{ data.name }</td>
+                              <td>{ data.study }</td>
+                              <td>{ data.skills }</td>
+                              <td>{ data.gender }</td>
+                              <td><img style={{ width : '60px', height : '60px' }} src={ data.photo } alt="" /></td>
+                              <td>
+                                  <Link to='/student/view/:id'  className='btn btn-info'><FontAwesomeIcon icon={ faEye }></FontAwesomeIcon></Link>&nbsp;
+
+                                  <Link to={ '/student/edit/' + data.id }  className='btn btn-warning'><FontAwesomeIcon icon={ faEdit }></FontAwesomeIcon></Link>&nbsp;
+
+                                  <Link to='student/delete/:id'  className='btn btn-danger'><FontAwesomeIcon icon={ faTrash }></FontAwesomeIcon></Link>
+                              </td>
+                            </tr>
                     
+                          
+                          )
+                        }
                           
 
                     </tbody>

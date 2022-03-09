@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Container, Row, Col, Button, Card, Form, FormLabel } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const StudentCreate = () => {
+
+    // navigator
+    const navigate = useNavigate();
 
     // default value set for all input tag
     const [input, setInput] = useState({
@@ -18,8 +23,20 @@ const StudentCreate = () => {
 
         setInput({
             ...input,
-            [e.target.name]     : e.target.value,
+            [e.target.name]   :  e.target.value
         });
+
+    }
+
+    
+
+    // form submit
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8000/students', input);
+
+        return navigate('/students');
 
     }
 
@@ -37,7 +54,7 @@ const StudentCreate = () => {
                         <h4 className='text-center'>Add New Student</h4>
                     </Card.Header>
                     <Card.Body className='student-table shadow'>
-                        <Form onSubmit='' method='POST'>
+                        <Form onSubmit={ handleFormSubmit } method='POST'>
                 
                             <Form.Group>
                                 <Form.Label>Student</Form.Label>

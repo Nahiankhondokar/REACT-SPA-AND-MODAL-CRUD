@@ -13,9 +13,9 @@ const Header = () => {
                     <Col>
                         <div className="menu-area">
                             <ul>
-                                <li><NavLink to="/">Home</NavLink></li>
-                                <li><NavLink to="/students">Students</NavLink></li>
-                                <li><NavLink to="/staff">Staffs</NavLink></li>
+                                <li><NavLink to="/home">Home</NavLink></li>
+                                <li><NavLink to="/students">Students <span>(spa)</span></NavLink></li>
+                                <li><NavLink to="/staff">Staffs <span>(modal)</span></NavLink></li>
                                 <li><NavLink to="/teacher">Teachers</NavLink></li>
                             </ul>
                         </div>

@@ -34,9 +34,9 @@ const Student = () => {
                             <td></td>
                             <td></td>
                             <td>
-                                <Button  variant='info'>view</Button>&nbsp;
-                                <Button  variant='warning'>Edit</Button>&nbsp;
-                                <Button  variant='danger'>Delete</Button>
+                                <Link to='/student/view/:id'  className='btn btn-info'>view</Link>&nbsp;
+                                <Link to='/student/edit/:id'  className='btn btn-warning'>Edit</Link>&nbsp;
+                                <Link to='student/delete/:id'  className='btn btn-danger'>Delete</Link>
                             </td>
                         </tr>
                     

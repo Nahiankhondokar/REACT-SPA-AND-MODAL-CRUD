@@ -67,11 +67,11 @@ const Student = () => {
                               <td>{ data.gender }</td>
                               <td><img style={{ width : '60px', height : '60px' }} src={ data.photo } alt="" /></td>
                               <td>
-                                  <Link to='/student/view/:id'  className='btn btn-info'><FontAwesomeIcon icon={ faEye }></FontAwesomeIcon></Link>&nbsp;
+                                  <Link to={ '/student/view/' + data.id }  className='btn btn-info'><FontAwesomeIcon icon={ faEye }></FontAwesomeIcon></Link>&nbsp;
 
                                   <Link to={ '/student/edit/' + data.id }  className='btn btn-warning'><FontAwesomeIcon icon={ faEdit }></FontAwesomeIcon></Link>&nbsp;
 
-                                  <Link to='student/delete/:id'  className='btn btn-danger'><FontAwesomeIcon icon={ faTrash }></FontAwesomeIcon></Link>
+                                  <Link to={ '/student/delete/' + data.id }  className='btn btn-danger'><FontAwesomeIcon icon={ faTrash }></FontAwesomeIcon></Link>
                               </td>
                             </tr>
                     

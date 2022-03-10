@@ -93,17 +93,20 @@ const StudentEdit = () => {
                                 <input value="male" name="gender" id='male' type="radio" /><label htmlFor="male"> Male</label>
 
                                 <input value="female" name="gender" id='female' type="radio" /><label htmlFor="female"> Female</label>
+
                             </Form.Group>
                                 <br></br>
 
                             <Form.Label className='d-block'>Skills</Form.Label>
                             <Form.Group value={ editData.skills } onChange={ (e) => handleInputval(e) } className='d-flex gap-2'>
 
+                                
                                 <input name='skills' value='PHP' id='PHP' type="checkbox" /><label htmlFor="PHP"> PHP</label>
 
                                 <input name='skills' value='React' id='React' type="checkbox" /><label htmlFor="React"> React</label>
 
                                 <input name='skills' value='javaScript' id='javaScript' type="checkbox" /><label htmlFor="javaScript"> javaScript</label>
+                                
                             </Form.Group>
 
                             <Form.Group>

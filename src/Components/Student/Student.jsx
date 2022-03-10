@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Row, Col, Button, Card, Table } from 'react-bootstrap';
 import axios from 'axios';
-
+import swal from 'sweetalert';
 
 
 
 const Student = () => {
+
+  // navigator
+  const navigate = useNavigate();
 
   // Student all data
   const [student, setStudent] = useState([]);
@@ -26,6 +29,48 @@ const Student = () => {
     let res = await axios.get('http://localhost:8000/students');
 
     setStudent(res.data.reverse());
+
+  }
+
+
+
+  // Student Delete
+  const handleStuDelete = (id) => {
+
+   swal({
+     title : 'are you sure',
+     text : 'Delete',
+     icon : 'warning',
+     buttons : true,
+     dangerMode : true
+   }).then( (data) => {
+
+    if(data == true){
+      
+      axios.delete('http://localhost:8000/students/' + id).then(res => {
+
+        axios.get('http://localhost:8000/students').then(res => {
+          setStudent(res.data);
+        });
+
+      });
+
+      swal({
+        title : 'Student Deleted Successfully',
+        icon : 'success'
+      });
+     
+
+
+    }else{
+      swal({
+        title : 'Data Safe',
+        icon : 'success'
+      });
+    }
+
+   });
+  
 
   }
 
@@ -71,7 +116,7 @@ const Student = () => {
 
                                   <Link to={ '/student/edit/' + data.id }  className='btn btn-warning'><FontAwesomeIcon icon={ faEdit }></FontAwesomeIcon></Link>&nbsp;
 
-                                  <Link to={ '/student/delete/' + data.id }  className='btn btn-danger'><FontAwesomeIcon icon={ faTrash }></FontAwesomeIcon></Link>
+                                  <button onClick={ () => handleStuDelete(data.id) } className='btn btn-danger'><FontAwesomeIcon icon={ faTrash }></FontAwesomeIcon></button>
                               </td>
                             </tr>
                     

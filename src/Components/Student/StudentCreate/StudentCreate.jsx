@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Card, Form, FormLabel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const StudentCreate = () => {
 
@@ -34,9 +35,19 @@ const StudentCreate = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8000/students', input);
+        // validation
+        if(input.name == '' || input.skills == '' || input.gender == ''){
+            swal('All Feilds are Required');
+          }else{
 
-        return navigate('/students');
+              // data store
+            axios.post('http://localhost:8000/students', input);
+
+            return navigate('/students');
+
+          }
+
+        
 
     }
 

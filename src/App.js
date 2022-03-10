@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
+import Staff from './Components/Staff/Staff';
 import Student from './Components/Student/Student';
 import StudentCreate from './Components/Student/StudentCreate/StudentCreate';
 import StudentEdit from './Components/Student/StudentEdit/StudentEdit';
@@ -22,6 +23,11 @@ function App() {
         <Route path='/student/create' element={ <StudentCreate></StudentCreate> }/>
         <Route path='/student/view/:id' element={ <StudentSingle></StudentSingle> }/>
         <Route path='/student/edit/:id' element={ <StudentEdit></StudentEdit> }/>
+        <Route path='/student/delete/:id' element={ <StudentSingle></StudentSingle> }/>
+
+        <Route path='/staff' element={ <Staff></Staff> }/>
+        <Route path='/student/delete/:id' element={ <StudentSingle></StudentSingle> }/>
+        <Route path='/student/delete/:id' element={ <StudentSingle></StudentSingle> }/>
         <Route path='/student/delete/:id' element={ <StudentSingle></StudentSingle> }/>
       </Routes>
     

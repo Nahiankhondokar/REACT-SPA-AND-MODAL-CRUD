@@ -1,53 +1,107 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Button, Table, Card } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import StaffModal from './StaffModal/StaffModal';
+import axios from 'axios';
+
 
 const Staff = () => {
+
+  // all staff state
+  const [allStaff, setAllStaff] = useState([]);
+
+  // modal manage state
+  const [modal, setModal] = useState(false);
+
+ 
+  // Modal manage
+  const handleModalShow = () => setModal(true);
+  const handleModalHide = () => setModal(false);
+
+
+  // single staff view
+
+
+
+
+
+
+  // data get useEffect
+  useEffect(() => {
+    allStaffGet();
+  }, [])
+
+  // all data get async function
+  async function allStaffGet(){
+
+    axios.get('http://localhost:8000/staff')
+    .then(res => setAllStaff(res.data));
+
+
+  }
+  
+
+
+
+
   return (
     <>
-     <section className="staff">
-    <Container>
-        <Row>
-          <Col md={10} className="m-auto mt-5">
+
+    <StaffModal show={ modal } hide={ handleModalHide }></StaffModal>
+
+     <Container>
+        <Row className='mt-5'>
+          <Col md={10} className='m-auto'>
             <Card>
               <Card.Header>
-                <h4 className='text-center'>All Students</h4>
+                <h4 className='text-center'>All Staffs</h4>
               </Card.Header>
               <Card.Body className='student-table shadow'>
                   <Table>
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Student</th>
-                            <th>Skill</th>
                             <th>Staff</th>
+                            <th>Activity</th>
+                            <th>gender</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                      {
+                        allStaff.map( (data, index) => 
+                        
+                          <tr>
+                            <td>{ index + 1 }</td>
+                            <td>{ data.name }</td>
+                            <td>{ data.role }</td>
+                            <td>{ data.gender }</td>
                             <td>
-                                <Button  variant='info'>view</Button>&nbsp;
-                                <Button  variant='warning'>Edit</Button>&nbsp;
-                                <Button  variant='danger'>Delete</Button>
+                              <Button onClick={ () => handleViewStaff(data.id) } variant='info'> <FontAwesomeIcon icon={ faEye }></FontAwesomeIcon> </Button>&nbsp;
+
+                              <Button variant='warning'> <FontAwesomeIcon icon={ faEdit }></FontAwesomeIcon> </Button>&nbsp;
+
+                              <Button variant='danger'> <FontAwesomeIcon icon={ faTrash }></FontAwesomeIcon> </Button>
                             </td>
-                        </tr>
+                          </tr>
+                        
+                        )
+                      }
+                      
                     
-                          
 
                     </tbody>
                 </Table>
               </Card.Body>
-              <Button  variant='info'>Add Student</Button>
+              <Button onClick={ handleModalShow } variant='info'>Add New Staff</Button>
+              
             </Card>
           </Col>
         </Row>
       </Container>
-    </section>
+      
     </>
   )
 };

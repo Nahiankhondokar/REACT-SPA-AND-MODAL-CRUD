@@ -84,7 +84,7 @@ const Student = () => {
           <Col md={10} className="m-auto mt-5">
             <Card>
               <Card.Header>
-                <h4 className='text-center'>All Students</h4>
+                <h4 className='text-center'>SPA Crud All Students</h4>
               </Card.Header>
               <Card.Body className='student-table shadow'>
                   <Table>

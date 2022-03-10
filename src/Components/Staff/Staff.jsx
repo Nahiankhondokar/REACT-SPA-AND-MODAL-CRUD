@@ -124,7 +124,7 @@ const Staff = () => {
           <Col md={10} className='m-auto'>
             <Card>
               <Card.Header>
-                <h4 className='text-center'>All Staffs</h4>
+                <h4 className='text-center'>Modal Crud All Staffs </h4>
               </Card.Header>
               <Card.Body className='student-table shadow'>
                   <Table>
